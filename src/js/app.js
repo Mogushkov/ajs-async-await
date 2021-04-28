@@ -1,10 +1,12 @@
-import GameSavingLoader from './GameSavingLoader';
+import json from './parser';
+import read from './reader';
 
-(async () => {
+export default async function loadGame() {
   try {
-    const response = GameSavingLoader.load();
-    console.log(response);
+    const data = await read();
+    const value = await json(data);
+    return value;
   } catch (error) {
-    console.log(error);
+    return error;
   }
-})();
+}
